@@ -1,0 +1,41 @@
+spring: 
+  application:
+    name: ehr-eureka
+  profiles:
+    active: dev
+
+server: 
+  port: 8761
+
+eureka:
+  server:
+    enable-self-preservation: false
+    eviction-interval-timer-in-ms: 5000
+    renewalPercentThreshold:  0.49
+
+#dev
+---
+eureka:
+  instance:
+    hostname: localhost
+    lease-renewal-interval-in-seconds: 10
+    lease-expiration-duration-in-seconds: 30
+  client: 
+    healthcheck:
+      enabled : true
+    serviceUrl: 
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+    registerWithEureka: false
+    fetchRegistry: false
+  server:
+    waitTimeInMsWhenSyncEmpty: 0
+
+#test
+---
+spring:
+  profiles: test
+
+#prod
+---
+spring:
+  profiles: prod

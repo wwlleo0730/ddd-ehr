@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: employee
+  profiles:
+    active: dev
+
+server:
+  port: 9000
+
+#dev
+---
+spring: 
+  profiles: dev
+eureka:
+  instance:
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 10
+    lease-expiration-duration-in-seconds: 20
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+    registry-fetch-interval-seconds: 5
+
+logging:
+  path: c:/logs/employee
+
+#prod
+---
+spring:
+  profiles: prod
+
+logging:
+  path: /tmp/logs/employee
